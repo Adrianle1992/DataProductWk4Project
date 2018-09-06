@@ -1,0 +1,54 @@
+Data Analysis Application
+========================================================
+author: Le, Duc Anh
+date: September 2018
+autosize: true
+DDP Week 4 Peer-graded Project
+
+Motivation
+========================================================
+
+This web-application aims at providing a convenient tool for quick analysis on two-variable data sets.The application takes in data in form .csv file and return the following: 
+- A scatter plot with regression line included
+- Predicted value of dependent variable
+- Summary of the regression model
+
+The following input is required from users: 
+
+- A .csv file contain a two-variable dataset with header
+- The file format information
+- Regression method required
+
+Data Format
+========================================================
+The data input should be in the form of .csv file. The headers must specified "x" and "y" indicating the predictor and the independent variable respectively. A sample of desire data format is shown below:
+```{r,echo=FALSE, warning=FALSE, message=FALSE}
+data(mtcars)
+x=mtcars$mpg;y=mtcars$wt;
+raw_data<-data.frame(x=x,y=y)
+head(raw_data)
+```
+
+Sample Plot
+========================================================
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE,fig.align="center",fig.width=15,fig.height=10}
+library(ggplot2)
+FitModel<-glm(y~x,family="gaussian",data=raw_data)
+fitData<-data.frame(x=seq(raw_data$x),max(raw_data$x),length.out = 100)
+yfit<-predict(FitModel,newdata=fitData)
+fitData$y<-yfit
+x_pred <-mean(raw_data$x)
+y_pred <-predict(FitModel,newdata=data.frame(x=x_pred))
+ggplot(raw_data,aes(x,y))+
+            geom_point(color="black") +
+            geom_line(aes(x,y),fitData,color="red")+
+            geom_point(aes(x_pred,y_pred), color="red", size=4)
+```
+
+Deliverables
+========================================================
+The deliverables of this project include
+- [The Data Analysis Application](https://adrianle.shinyapps.io/DataAnalysis/) hosted on shinyapps.io server
+- [The Pitch Presentation](http://rpubs.com/ducanhle1992/DDPWeek4Project) hosted on rpubs
+- [The Github Repository](https://github.com/Adrianle1992/DataProductWk4Project.git) containing the source codes for ui.R, server.R and this presentaion

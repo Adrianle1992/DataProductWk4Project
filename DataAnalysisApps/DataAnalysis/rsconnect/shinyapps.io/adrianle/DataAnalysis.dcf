@@ -1,0 +1,12 @@
+name: DataAnalysis
+title: DataAnalysis
+username:
+account: adrianle
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 423453
+bundleId: 1572216
+url: https://adrianle.shinyapps.io/DataAnalysis/
+when: 1536232276.87319
+asMultiple: FALSE
+asStatic: FALSE
